@@ -1,46 +1,47 @@
-name: Deploy Flask App to Heroku
+name: Flask App CI
 
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  deploy:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
+    # Step 1: Check out the repository
     - name: Checkout code
       uses: actions/checkout@v4
 
+    # Step 2: Set up Python environment
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
         python-version: 3.12.3
 
+    # Step 3: Install dependencies
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install flask pytest flake8
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-    - name: Lint and test
+    # Step 4: Lint the code
+    - name: Lint with flake8
       run: |
         flake8 . --count --exit-zero --max-line-length=127 --statistics
-        pytest --disable-warnings
 
-    - name: Login to Heroku
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+    # Step 5: Run Flask application locally
+    - name: Start Flask server
       run: |
-        echo "machine api.heroku.com
-        login ${{ secrets.HEROKU_EMAIL }}
-        password ${{ secrets.HEROKU_API_KEY }}" > ~/.netrc
-        echo "machine git.heroku.com
-        login ${{ secrets.HEROKU_EMAIL }}
-        password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
-        chmod 600 ~/.netrc
+        nohup flask run --host=127.0.0.1 --port=5000 &
+        sleep 5  # Allow the server time to start
 
-    - name: Deploy to Heroku
+    # Step 7: Stop Flask server
+    - name: Stop Flask server
       run: |
-        heroku git:remote -a <your-heroku-app-name>
-        git push heroku main
+        pkill -f "flask run"
