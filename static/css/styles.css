@@ -1,0 +1,36 @@
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin-top: 50px;
+}
+
+.card {
+    background-color: #f8f9fa;
+}
+
+h1, h2 {
+    color: #495057;
+}
+
+button {
+    font-weight: bold;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.list-group-item {
+    font-size: 16px;
+}
+
+.bg-light {
+    background-color: #f8f9fa;
+}
