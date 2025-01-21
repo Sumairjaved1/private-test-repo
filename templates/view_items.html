@@ -1,110 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Items</title>
-    <!-- Bootstrap CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <style>
-        .close-btn {
-            cursor: pointer;
-        }
-        .disabled-btn {
-            pointer-events: none;
-            opacity: 0.5;
-        }
-        .alert-message {
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body class="bg-light">
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">All Items</h1>
+{% extends "base.html" %}
 
-        {% if items %}
-            <ul class="list-group">
-                {% for item_id, item_value in items.items() %}
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <strong>ID:</strong> {{ item_id }} | <strong>Value:</strong> {{ item_value }}
-                        
-                        <!-- Buttons for GET, PUT, DELETE -->
-                        <div class="btn-group" role="group">
-                            <a href="/item/{{ item_id }}" class="btn btn-info btn-sm">GET</a>
-                            <a href="/item/{{ item_id }}/update" class="btn btn-warning btn-sm">PUT</a>
-                            <!-- DELETE Form with JavaScript handling -->
-                            <form action="/item/{{ item_id }}" method="POST" style="display:inline;" onsubmit="event.preventDefault(); deleteItem('{{ item_id }}');">
-                                <button type="submit" class="btn btn-danger btn-sm">DELETE</button>
-                            </form>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p class="text-center">No items available.</p>
-        {% endif %}
+{% block title %}View Items{% endblock %}
 
-        <!-- Alert Message (for success or error) -->
-        <div id="alertMessage" class="alert alert-info alert-message hidden-btn" role="alert"></div>
-
-        <!-- Close Window Button -->
-        <div class="text-center mt-4">
-            <button class="btn btn-secondary close-btn" id="closeWindowButton" onclick="closeWindow()">Close Window</button>
-        </div>
-    </div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-
-    <script type="text/javascript">
-        // Function to handle the delete operation using JavaScript and AJAX (for using DELETE method)
-        function deleteItem(item_id) {
-            fetch(`/item/${item_id}`, {
-                method: 'DELETE',
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Show success or error message
-                showAlert(data.message || data.error, data.message ? 'success' : 'danger');
-                if (data.message) {
-                    window.location.reload();  // Reload the page after successful deletion
-                }
-            })
-            .catch(error => {
-                showAlert("An error occurred while deleting the item.", 'danger');
-            });
-        }
-
-        // Function to show alert messages
-        function showAlert(message, type) {
-            const alertMessage = document.getElementById('alertMessage');
-            alertMessage.textContent = message;
-            alertMessage.className = `alert alert-${type} alert-message`;  // Set message type (success or danger)
-            alertMessage.classList.remove('hidden-btn');  // Show alert message
-            setTimeout(() => {
-                alertMessage.classList.add('hidden-btn');  // Hide alert message after a few seconds
-            }, 5000);
-        }
-
-        // Simplified Close window functionality
-        function closeWindow() {
-            try {
-                window.close(); // Attempt to close the window
-            } catch (e) {
-                // If window.close() fails (due to browser restrictions), show alert
-                showAlert("This window cannot be closed because it wasn't opened by a script.", 'warning');
-            }
-        }
-
-        // If window was opened manually (not via a script), inform the user
-        if (window.opener === null) {
-            const closeButton = document.getElementById('closeWindowButton');
-            closeButton.classList.remove('disabled-btn');  // Keep button active
-            closeButton.setAttribute('title', 'You may attempt to close the window.');
-        }
-    </script>
-</body>
-</html>
+{% block content %}
+<h2 class="text-center">All Items</h2>
+{% if items %}
+    <ul class="list-group mt-4">
+        {% for item_id, item_value in items.items() %}
+            <li class="list-group-item d-flex justify-content-between">
+                <span><strong>ID:</strong> {{ item_id }} | <strong>Value:</strong> {{ item_value }}</span>
+                <div>
+                    <a href="/item/{{ item_id }}" class="btn btn-info btn-sm">GET</a>
+                    <a href="/item/{{ item_id }}/update" class="btn btn-warning btn-sm">PUT</a>
+                    <form action="/item/{{ item_id }}" method="POST" class="d-inline" onsubmit="event.preventDefault(); deleteItem('{{ item_id }}');">
+                        <button type="submit" class="btn btn-danger btn-sm">DELETE</button>
+                    </form>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p class="text-center mt-4">No items available.</p>
+{% endif %}
+{% endblock %}
