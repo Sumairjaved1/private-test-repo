@@ -5,125 +5,99 @@ from datetime import timedelta
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
 
+# Initialize Flask app
 app = Flask(__name__)
 
 # In-memory data store (for demonstration purposes)
 data_store = {}
 
-
-# Set up logging
+# Logging configuration
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-session.permanent = True
 
-# Secret key for session management (change this to a secure key in production)
-app.secret_key = os.urandom(24)
+# Application configuration
+app.secret_key = os.urandom(24)  # Change this to a secure key in production
+app.permanent_session_lifetime = timedelta(minutes=30)  # Set session expiration time
 
-# Set session to expire after a certain time
-app.permanent_session_lifetime = timedelta(minutes=30)  # Set session lifetime to 30 minutes
-
-# Dummy credentials (hashed for demo purposes)
+# Dummy user credentials
 USER_CREDENTIALS = {
     'admin': generate_password_hash('admin'),
     'user': generate_password_hash('user')
 }
 
-if not item_id:
-    return jsonify({"error": "Invalid item ID"}), 400
-
-# Helper function to check session
+# Helper functions
 def is_logged_in():
+    """Check if the user is logged in."""
     return 'username' in session
 
-# Home route
+# Routes
+
 @app.route('/')
 def home():
     if not is_logged_in():
         return redirect(url_for('login'))
     return render_template('index.html')
 
-# Login route
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if is_logged_in():
         return redirect(url_for('home'))
-    
+
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        
+
         if username in USER_CREDENTIALS and check_password_hash(USER_CREDENTIALS[username], password):
             session['username'] = username
             session['session_id'] = str(uuid.uuid4())
             return redirect(url_for('home'))
         else:
             return render_template('login.html', error='Invalid username or password')
-    
+
     return render_template('login.html')
 
-# View Items route
 @app.route('/view_items')
 def view_items():
     if not is_logged_in():
         return redirect(url_for('login'))
     return render_template('view_items.html', items=data_store)
 
-
-# GET Item by ID route
 @app.route('/item/<item_id>', methods=['GET'])
 def get_item(item_id):
+    """Get item by ID."""
     item = data_store.get(item_id)
     if item:
         return jsonify({item_id: item}), 200
-    else:
-        return jsonify({"error": f"Item with ID {item_id} not found"}), 404
+    return jsonify({"error": f"Item with ID {item_id} not found"}), 404
 
-# Update Item by ID route
 @app.route('/item/<item_id>/update', methods=['GET', 'POST'])
 def update_item(item_id):
+    """Update item by ID."""
     if request.method == 'POST':
-        value = request.form.get('value')  # Use form data for POST request
+        value = request.form.get('value')
         if not value:
             return jsonify({"error": "Missing 'value' in request data"}), 400
         if item_id not in data_store:
             return jsonify({"error": f"Item with ID {item_id} not found"}), 404
         data_store[item_id] = value
-        return redirect(url_for('view_items'))  # Redirect to view items after update
+        return redirect(url_for('view_items'))
 
-    # If it's GET request, render the update form
     item_value = data_store.get(item_id)
     if not item_value:
         return jsonify({"error": f"Item with ID {item_id} not found"}), 404
     return render_template('update_item.html', item_id=item_id, item_value=item_value)
 
-# Delete Item route
 @app.route('/item/<item_id>', methods=['DELETE'])
 def delete_item(item_id):
+    """Delete item by ID."""
     if item_id in data_store:
         del data_store[item_id]
         return jsonify({"message": f"Item with ID {item_id} deleted"}), 200
-    else:
-        return jsonify({"error": f"Item with ID {item_id} not found"}), 404
+    return jsonify({"error": f"Item with ID {item_id} not found"}), 404
 
-# Logout route
-@app.route('/logout', methods=['POST'])
-def logout():
-    session.clear()
-    return redirect(url_for('login'))
-    
-@app.route('/item/<item_id>', methods=['POST'])
-def delete_item(item_id):
-    if request.form.get('_method') == 'DELETE':
-        if item_id in data_store:
-            del data_store[item_id]
-            return jsonify({"message": f"Item with ID {item_id} deleted"}), 200
-        else:
-            return jsonify({"error": f"Item with ID {item_id} not found"}), 404
-    return jsonify({"error": "Invalid method"}), 405
-
-# Create Item via GET method
 @app.route('/item/create', methods=['GET', 'POST'])
-def create_item_get():
+def create_item():
+    """Create a new item."""
     if not is_logged_in():
         return redirect(url_for('login'))
 
@@ -142,7 +116,12 @@ def create_item_get():
 
     return render_template('create_item.html')
 
-# Custom error handling
+@app.route('/logout', methods=['POST'])
+def logout():
+    """Logout the user and clear the session."""
+    session.clear()
+    return redirect(url_for('login'))
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
@@ -150,8 +129,7 @@ def page_not_found(e):
 @app.errorhandler(500)
 def internal_server_error(e):
     logger.error(f"Internal server error: {e}")
-    return jsonify({"error": "Internal server error"}), 500
-
+    return render_template('500.html'), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
