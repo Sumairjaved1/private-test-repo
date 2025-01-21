@@ -1,8 +1,8 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif; /* Updated font for a modern look */
     color: #343a40; /* Improve readability */
     background-color: #e9ecef; /* Light background for the entire page */
-    line-height: 1.6;
+    line-height: 1.8; /* Increased line height for better readability */
     margin: 0;
     padding: 0;
 }
@@ -10,25 +10,26 @@ body {
 .container {
     max-width: 800px;
     margin: 50px auto;
-    padding: 20px;
+    padding: 30px; /* Increased padding for better spacing */
     background: #ffffff; /* Card-like background */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* Slightly more rounded corners */
 }
 
 .card {
     background-color: #f8f9fa;
     border: 1px solid #dee2e6;
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px; /* Improved padding for better spacing */
+    margin-bottom: 25px; /* Slightly increased margin between cards */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 h1, h2 {
     color: #495057;
-    font-weight: 600;
-    margin-bottom: 15px;
+    font-weight: 700; /* Increased font weight for headers */
+    margin-bottom: 20px; /* Better spacing below headers */
+    font-size: 1.8rem; /* Adjusted font size for larger headers */
 }
 
 button {
@@ -36,8 +37,9 @@ button {
     color: #ffffff;
     background-color: #007bff;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 12px 24px; /* Increased button padding for better clickability */
+    font-size: 1rem; /* Increased button font size */
+    border-radius: 8px; /* More rounded buttons */
     transition: background-color 0.3s ease;
 }
 
@@ -49,20 +51,22 @@ button:hover {
 .form-label {
     font-weight: bold;
     color: #495057;
-    margin-bottom: 5px;
+    margin-bottom: 10px; /* Better spacing between labels and inputs */
+    font-size: 1rem; /* Slightly larger labels */
 }
 
 .text-center {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px; /* Improved spacing below centered elements */
+    font-size: 1.2rem; /* Slightly larger font for emphasis */
 }
 
 .list-group-item {
-    font-size: 16px;
+    font-size: 1rem; /* Standardized font size for list items */
     color: #495057;
     border: none;
-    padding: 15px;
-    border-radius: 5px;
+    padding: 20px; /* Increased padding for better readability */
+    border-radius: 8px; /* More rounded corners */
     background: #f8f9fa;
     transition: background-color 0.3s ease;
 }
@@ -73,6 +77,6 @@ button:hover {
 
 .bg-light {
     background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
+    padding: 30px; /* Enhanced padding for better spacing */
+    border-radius: 10px; /* Rounded corners for consistency */
 }
