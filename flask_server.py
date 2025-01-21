@@ -14,6 +14,7 @@ data_store = {}
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+session.permanent = True
 
 # Secret key for session management (change this to a secure key in production)
 app.secret_key = os.urandom(24)
@@ -26,6 +27,9 @@ USER_CREDENTIALS = {
     'admin': generate_password_hash('admin'),
     'user': generate_password_hash('user')
 }
+
+if not item_id:
+    return jsonify({"error": "Invalid item ID"}), 400
 
 # Helper function to check session
 def is_logged_in():
@@ -106,6 +110,16 @@ def delete_item(item_id):
 def logout():
     session.clear()
     return redirect(url_for('login'))
+    
+@app.route('/item/<item_id>', methods=['POST'])
+def delete_item(item_id):
+    if request.form.get('_method') == 'DELETE':
+        if item_id in data_store:
+            del data_store[item_id]
+            return jsonify({"message": f"Item with ID {item_id} deleted"}), 200
+        else:
+            return jsonify({"error": f"Item with ID {item_id} not found"}), 404
+    return jsonify({"error": "Invalid method"}), 405
 
 # Create Item via GET method
 @app.route('/item/create', methods=['GET', 'POST'])
