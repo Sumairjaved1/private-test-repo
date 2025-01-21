@@ -1,51 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Item Manager</title>
-    <!-- Bootstrap CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-</head>
-<body class="bg-light">
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">Welcome to Item Manager</h1>
+{% extends "base.html" %}
 
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <!-- Create Item Form -->
-                <div class="card p-4 mb-4">
-                    <h2>Create Item</h2>
-                    <form id="create-form" method="POST">
-                        <div class="mb-3">
-                            <label for="create-id" class="form-label">ID</label>
-                            <input type="text" id="create-id" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="create-value" class="form-label">Value</label>
-                            <input type="text" id="create-value" class="form-control" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Create Item</button>
-                    </form>
-                </div>
+{% block title %}Home{% endblock %}
 
-                <!-- View Items Button -->
-                <div class="text-center">
-                    <a href="/view_items" class="btn btn-success w-100">View All Items</a>
-                </div>
-
-                <!-- Logout Button -->
-                <form action="/logout" method="POST" class="mt-4">
-                    <button type="submit" class="btn btn-danger w-100">Logout</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
-</body>
-</html>
+{% block content %}
+<div class="text-center">
+    <h2>Welcome to the Item Manager</h2>
+    <p>Manage your items efficiently and securely.</p>
+</div>
+{% endblock %}
