@@ -80,7 +80,7 @@ button:hover {
 }
 
 .bg-light {
-    background-color: #f9f9f9; /* Light gray background for consistency */
-    padding: 30px; /* Enhanced padding for better spacing */
-    border-radius: 10px; /* Rounded corners for consistency */
+    background-color: #000000; /* Light gray background for consistency */
+    padding: 60px; /* Enhanced padding for better spacing */
+    border-radius: 20px; /* Rounded corners for consistency */
 }
