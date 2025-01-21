@@ -121,6 +121,27 @@ def logout():
     session.clear()
     return redirect(url_for('login'))
 
+# Create Item via GET method
+@app.route('/item/create', methods=['GET', 'POST'])
+def create_item_get():
+    if not is_logged_in():
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        item_id = request.form.get('id')
+        item_value = request.form.get('value')
+
+        if not item_id or not item_value:
+            return render_template('create_item.html', error="Both ID and Value are required")
+
+        if item_id in data_store:
+            return render_template('create_item.html', error=f"Item with ID {item_id} already exists")
+
+        data_store[item_id] = item_value
+        return redirect(url_for('view_items'))
+
+    return render_template('create_item.html')
+
 # Custom error handling
 @app.errorhandler(404)
 def page_not_found(e):
