@@ -19,6 +19,10 @@
             </li>
         {% endfor %}
     </ul>
+<form action="/item/{{ item_id }}" method="POST" class="d-inline">
+    <input type="hidden" name="_method" value="DELETE">
+    <button type="submit" class="btn btn-danger btn-sm">DELETE</button>
+</form>
 {% else %}
     <p class="text-center mt-4">No items available.</p>
 {% endif %}
