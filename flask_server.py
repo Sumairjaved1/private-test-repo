@@ -30,8 +30,12 @@ def is_logged_in():
     """Check if the user is logged in."""
     return 'username' in session
 
-# Routes
+@app.before_request
+def make_session_permanent():
+    """Ensure session is refreshed on each request."""
+    session.permanent = True
 
+# Routes
 @app.route('/')
 def home():
     if not is_logged_in():
@@ -76,15 +80,15 @@ def update_item(item_id):
     if request.method == 'POST':
         value = request.form.get('value')
         if not value:
-            return jsonify({"error": "Missing 'value' in request data"}), 400
+            return render_template('update_item.html', error="Value is required", item_id=item_id, title="Update Item")
         if item_id not in data_store:
-            return jsonify({"error": f"Item with ID {item_id} not found"}), 404
+            return render_template('update_item.html', error=f"Item with ID {item_id} not found", item_id=item_id, title="Update Item")
         data_store[item_id] = value
         return redirect(url_for('view_items'))
 
     item_value = data_store.get(item_id)
     if not item_value:
-        return jsonify({"error": f"Item with ID {item_id} not found"}), 404
+        return render_template('404.html', title="Item Not Found"), 404
     return render_template('update_item.html', item_id=item_id, item_value=item_value, title="Update Item")
 
 @app.route('/item/<item_id>', methods=['DELETE'])
