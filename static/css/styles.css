@@ -26,10 +26,13 @@ body {
 }
 
 h1, h2 {
-    color: #000000; /* Black headers for readability */
-    font-weight: 1000; /* Increased font weight for headers */
-    margin-bottom: 30px; /* Better spacing below headers */
-    font-size: 2.8rem; /* Adjusted font size for larger headers */
+    color: #b71c1c; /* Red headers for emphasis */
+    font-weight: 800; /* Slightly reduced font weight for balanced boldness */
+    margin-bottom: 30px; /* Consistent spacing below headers */
+    font-size: 2.5rem; /* Adjusted font size for optimal readability */
+    text-transform: uppercase; /* Uppercase text for impact */
+    letter-spacing: 0.05rem; /* Slight letter spacing for cleaner appearance */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
 
 button {
@@ -37,8 +40,8 @@ button {
     color: #ffffff;
     background-color: #007bff; /* Blue background for buttons */
     border: none;
-    padding: 24px 48px; /* Increased button padding for better clickability */
-    font-size: 3rem; /* Increased button font size */
+    padding: 12px 24px; /* Increased button padding for better clickability */
+    font-size: 1rem; /* Increased button font size */
     border-radius: 8px; /* More rounded buttons */
     transition: background-color 0.3s ease;
 }
