@@ -1,7 +1,7 @@
 body {
     font-family: 'Roboto', sans-serif; /* Updated font for a modern look */
-    color: #343a40; /* Improve readability */
-    background-color: #e9ecef; /* Light background for the entire page */
+    color: #ffffff; /* White font for readability on dark background */
+    background-color: #000000; /* Dark background for contrast */
     line-height: 1.8; /* Increased line height for better readability */
     margin: 0;
     padding: 0;
@@ -11,22 +11,22 @@ body {
     max-width: 800px;
     margin: 50px auto;
     padding: 30px; /* Increased padding for better spacing */
-    background: #ffffff; /* Card-like background */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: #1c1c1c; /* Dark card background */
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
     border-radius: 10px; /* Slightly more rounded corners */
 }
 
 .card {
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
+    background-color: #1f1f1f; /* Darker card color */
+    border: 1px solid #343a40; /* Subtle border for card separation */
     border-radius: 10px;
     padding: 20px; /* Improved padding for better spacing */
     margin-bottom: 25px; /* Slightly increased margin between cards */
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 6px rgba(255, 255, 255, 0.1);
 }
 
 h1, h2 {
-    color: #495057;
+    color: #ffffff; /* White headers for readability */
     font-weight: 700; /* Increased font weight for headers */
     margin-bottom: 20px; /* Better spacing below headers */
     font-size: 1.8rem; /* Adjusted font size for larger headers */
@@ -50,7 +50,7 @@ button:hover {
 
 .form-label {
     font-weight: bold;
-    color: #495057;
+    color: #ffffff; /* White labels for contrast */
     margin-bottom: 10px; /* Better spacing between labels and inputs */
     font-size: 1rem; /* Slightly larger labels */
 }
@@ -59,24 +59,25 @@ button:hover {
     text-align: center;
     margin-bottom: 30px; /* Improved spacing below centered elements */
     font-size: 1.2rem; /* Slightly larger font for emphasis */
+    color: #ffffff; /* White text for visibility */
 }
 
 .list-group-item {
     font-size: 1rem; /* Standardized font size for list items */
-    color: #495057;
+    color: #ffffff; /* White text for readability */
     border: none;
     padding: 20px; /* Increased padding for better readability */
     border-radius: 8px; /* More rounded corners */
-    background: #f8f9fa;
+    background: #1f1f1f; /* Dark background for list items */
     transition: background-color 0.3s ease;
 }
 
 .list-group-item:hover {
-    background-color: #e2e6ea;
+    background-color: #343a40; /* Slightly lighter hover effect */
 }
 
 .bg-light {
-    background-color: #f8f9fa;
+    background-color: #1c1c1c; /* Dark background for consistency */
     padding: 30px; /* Enhanced padding for better spacing */
     border-radius: 10px; /* Rounded corners for consistency */
 }
