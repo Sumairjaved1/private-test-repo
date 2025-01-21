@@ -1,32 +1,32 @@
 body {
-    font-family: 'Roboto', sans-serif; /* Updated font for a modern look */
-    color: #ffffff; /* White font for readability */
-    background-color: #4caf50; /* Green background for contrast */
-    line-height: 1.8; /* Increased line height for better readability */
-    margin: 0;
-    padding: 0;
+    font-family: 'Open Sans', sans-serif; /* Updated font for a clean look */
+    color: #000000; /* Black font for readability */
+    background-color: #ffffff; /* White background for contrast */
+    line-height: 2.7; /* Increased line height for better readability */
+    margin: 1rem; /* Adjusted margin for consistent spacing */
+    padding: 1rem; /* Adjusted padding for consistent spacing */
 }
 
 .container {
     max-width: 800px;
     margin: 50px auto;
     padding: 30px; /* Increased padding for better spacing */
-    background: #d32f2f; /* Red card background */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background: #f9f9f9; /* Light gray background for subtle contrast */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px; /* Slightly more rounded corners */
 }
 
 .card {
-    background-color: #f44336; /* Brighter red card color */
-    border: 1px solid #b71c1c; /* Darker red for border */
+    background-color: #f4f4f4; /* Light gray card color */
+    border: 1px solid #dddddd; /* Subtle border for separation */
     border-radius: 10px;
     padding: 20px; /* Improved padding for better spacing */
     margin-bottom: 25px; /* Slightly increased margin between cards */
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 h1, h2 {
-    color: #ffffff; /* White headers for readability */
+    color: #000000; /* Black headers for readability */
     font-weight: 700; /* Increased font weight for headers */
     margin-bottom: 20px; /* Better spacing below headers */
     font-size: 1.8rem; /* Adjusted font size for larger headers */
@@ -35,7 +35,7 @@ h1, h2 {
 button {
     font-weight: bold;
     color: #ffffff;
-    background-color: #d32f2f; /* Red background for buttons */
+    background-color: #007bff; /* Blue background for buttons */
     border: none;
     padding: 12px 24px; /* Increased button padding for better clickability */
     font-size: 1rem; /* Increased button font size */
@@ -44,13 +44,13 @@ button {
 }
 
 button:hover {
-    background-color: #b71c1c; /* Darker red on hover */
+    background-color: #0056b3; /* Darker blue on hover */
     cursor: pointer;
 }
 
 .form-label {
     font-weight: bold;
-    color: #ffffff; /* White labels for contrast */
+    color: #000000; /* Black labels for contrast */
     margin-bottom: 10px; /* Better spacing between labels and inputs */
     font-size: 1rem; /* Slightly larger labels */
 }
@@ -59,25 +59,25 @@ button:hover {
     text-align: center;
     margin-bottom: 30px; /* Improved spacing below centered elements */
     font-size: 1.2rem; /* Slightly larger font for emphasis */
-    color: #ffffff; /* White text for visibility */
+    color: #000000; /* Black text for visibility */
 }
 
 .list-group-item {
     font-size: 1rem; /* Standardized font size for list items */
-    color: #ffffff; /* White text for readability */
+    color: #000000; /* Black text for readability */
     border: none;
     padding: 20px; /* Increased padding for better readability */
     border-radius: 8px; /* More rounded corners */
-    background: #d32f2f; /* Red background for list items */
+    background: #f4f4f4; /* Light gray background for list items */
     transition: background-color 0.3s ease;
 }
 
 .list-group-item:hover {
-    background-color: #b71c1c; /* Darker red hover effect */
+    background-color: #e0e0e0; /* Slightly darker hover effect */
 }
 
 .bg-light {
-    background-color: #4caf50; /* Green background for consistency */
+    background-color: #f9f9f9; /* Light gray background for consistency */
     padding: 30px; /* Enhanced padding for better spacing */
     border-radius: 10px; /* Rounded corners for consistency */
 }
