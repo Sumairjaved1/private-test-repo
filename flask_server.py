@@ -64,20 +64,6 @@ def view_items():
         return redirect(url_for('login'))
     return render_template('view_items.html', items=data_store)
 
-# Create Item route
-@app.route('/item', methods=['POST'])
-def create_item():
-    try:
-        data = request.get_json()
-        if 'id' not in data or 'value' not in data:
-            return jsonify({"error": "Missing 'id' or 'value' in request data"}), 400
-        if data['id'] in data_store:
-            return jsonify({"error": f"Item with ID {data['id']} already exists"}), 409
-        data_store[data['id']] = data['value']
-        return jsonify({"message": f"Item with ID {data['id']} created"}), 201
-    except Exception as e:
-        logger.error(f"Error creating item: {e}")
-        return jsonify({"error": "Internal server error"}), 500
 
 # GET Item by ID route
 @app.route('/item/<item_id>', methods=['GET'])
