@@ -1,7 +1,7 @@
 body {
     font-family: 'Roboto', sans-serif; /* Updated font for a modern look */
-    color: #ffffff; /* White font for readability on dark background */
-    background-color: #000000; /* Dark background for contrast */
+    color: #ffffff; /* White font for readability */
+    background-color: #4caf50; /* Green background for contrast */
     line-height: 1.8; /* Increased line height for better readability */
     margin: 0;
     padding: 0;
@@ -11,18 +11,18 @@ body {
     max-width: 800px;
     margin: 50px auto;
     padding: 30px; /* Increased padding for better spacing */
-    background: #1c1c1c; /* Dark card background */
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+    background: #d32f2f; /* Red card background */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     border-radius: 10px; /* Slightly more rounded corners */
 }
 
 .card {
-    background-color: #1f1f1f; /* Darker card color */
-    border: 1px solid #343a40; /* Subtle border for card separation */
+    background-color: #f44336; /* Brighter red card color */
+    border: 1px solid #b71c1c; /* Darker red for border */
     border-radius: 10px;
     padding: 20px; /* Improved padding for better spacing */
     margin-bottom: 25px; /* Slightly increased margin between cards */
-    box-shadow: 0 3px 6px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
 h1, h2 {
@@ -35,7 +35,7 @@ h1, h2 {
 button {
     font-weight: bold;
     color: #ffffff;
-    background-color: #007bff;
+    background-color: #d32f2f; /* Red background for buttons */
     border: none;
     padding: 12px 24px; /* Increased button padding for better clickability */
     font-size: 1rem; /* Increased button font size */
@@ -44,7 +44,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #b71c1c; /* Darker red on hover */
     cursor: pointer;
 }
 
@@ -68,16 +68,16 @@ button:hover {
     border: none;
     padding: 20px; /* Increased padding for better readability */
     border-radius: 8px; /* More rounded corners */
-    background: #1f1f1f; /* Dark background for list items */
+    background: #d32f2f; /* Red background for list items */
     transition: background-color 0.3s ease;
 }
 
 .list-group-item:hover {
-    background-color: #343a40; /* Slightly lighter hover effect */
+    background-color: #b71c1c; /* Darker red hover effect */
 }
 
 .bg-light {
-    background-color: #1c1c1c; /* Dark background for consistency */
+    background-color: #4caf50; /* Green background for consistency */
     padding: 30px; /* Enhanced padding for better spacing */
     border-radius: 10px; /* Rounded corners for consistency */
 }
