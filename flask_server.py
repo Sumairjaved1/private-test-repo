@@ -36,7 +36,7 @@ def is_logged_in():
 def home():
     if not is_logged_in():
         return redirect(url_for('login'))
-    return render_template('index.html')
+    return render_template('index.html', title="Home")
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -52,15 +52,15 @@ def login():
             session['session_id'] = str(uuid.uuid4())
             return redirect(url_for('home'))
         else:
-            return render_template('login.html', error='Invalid username or password')
+            return render_template('login.html', error='Invalid username or password', title="Login")
 
-    return render_template('login.html')
+    return render_template('login.html', title="Login")
 
 @app.route('/view_items')
 def view_items():
     if not is_logged_in():
         return redirect(url_for('login'))
-    return render_template('view_items.html', items=data_store)
+    return render_template('view_items.html', items=data_store, title="View Items")
 
 @app.route('/item/<item_id>', methods=['GET'])
 def get_item(item_id):
@@ -85,7 +85,7 @@ def update_item(item_id):
     item_value = data_store.get(item_id)
     if not item_value:
         return jsonify({"error": f"Item with ID {item_id} not found"}), 404
-    return render_template('update_item.html', item_id=item_id, item_value=item_value)
+    return render_template('update_item.html', item_id=item_id, item_value=item_value, title="Update Item")
 
 @app.route('/item/<item_id>', methods=['DELETE'])
 def delete_item(item_id):
@@ -106,15 +106,15 @@ def create_item():
         item_value = request.form.get('value')
 
         if not item_id or not item_value:
-            return render_template('create_item.html', error="Both ID and Value are required")
+            return render_template('create_item.html', error="Both ID and Value are required", title="Create Item")
 
         if item_id in data_store:
-            return render_template('create_item.html', error=f"Item with ID {item_id} already exists")
+            return render_template('create_item.html', error=f"Item with ID {item_id} already exists", title="Create Item")
 
         data_store[item_id] = item_value
         return redirect(url_for('view_items'))
 
-    return render_template('create_item.html')
+    return render_template('create_item.html', title="Create Item")
 
 @app.route('/logout', methods=['POST'])
 def logout():
@@ -124,12 +124,12 @@ def logout():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html'), 404
+    return render_template('404.html', title="Page Not Found"), 404
 
 @app.errorhandler(500)
 def internal_server_error(e):
     logger.error(f"Internal server error: {e}")
-    return render_template('500.html'), 500
+    return render_template('500.html', title="Server Error"), 500
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
